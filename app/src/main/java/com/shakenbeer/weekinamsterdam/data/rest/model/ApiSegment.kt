@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Segment(
+data class ApiSegment(
 
 	@field:SerializedName("Directionality")
 	val directionality: String? = null,

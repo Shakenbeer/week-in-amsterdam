@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Agent(
+data class ApiAgent(
 
 	@field:SerializedName("Status")
 	val status: String? = null,

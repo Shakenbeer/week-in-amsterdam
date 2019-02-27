@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Query(
+data class ApiQuery(
 
 	@field:SerializedName("Locale")
 	val locale: String? = null,

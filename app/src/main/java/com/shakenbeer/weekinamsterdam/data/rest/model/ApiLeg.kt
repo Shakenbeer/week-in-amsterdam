@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Leg(
+data class ApiLeg(
 
     @field:SerializedName("SegmentIds")
 	val segmentIds: List<Int?>? = null,
@@ -26,7 +26,7 @@ data class Leg(
 	val departure: String? = null,
 
     @field:SerializedName("FlightNumbers")
-	val flightNumbers: List<FlightNumber?>? = null,
+	val flightNumbers: List<ApiFlightNumber?>? = null,
 
     @field:SerializedName("JourneyMode")
 	val journeyMode: String? = null,

@@ -4,33 +4,33 @@ import com.google.gson.annotations.SerializedName
 
 data class FlightsResponse(
 
-	@field:SerializedName("Status")
+    @field:SerializedName("Status")
 	val status: String? = null,
 
-	@field:SerializedName("Carriers")
-	val carriers: List<Carrier?>? = null,
+    @field:SerializedName("Carriers")
+	val carriers: List<ApiCarrier?>? = null,
 
-	@field:SerializedName("Legs")
-	val legs: List<Leg?>? = null,
+    @field:SerializedName("Legs")
+	val legs: List<ApiLeg?>? = null,
 
-	@field:SerializedName("Itineraries")
-	val itineraries: List<Itinerary?>? = null,
+    @field:SerializedName("Itineraries")
+	val itineraries: List<ApiItinerary?>? = null,
 
-	@field:SerializedName("Query")
-	val query: Query? = null,
+    @field:SerializedName("Query")
+	val query: ApiQuery? = null,
 
-	@field:SerializedName("SessionKey")
+    @field:SerializedName("SessionKey")
 	val sessionKey: String? = null,
 
-	@field:SerializedName("Agents")
-	val agents: List<Agent?>? = null,
+    @field:SerializedName("Agents")
+	val agents: List<ApiAgent?>? = null,
 
-	@field:SerializedName("Segments")
-	val segments: List<Segment?>? = null,
+    @field:SerializedName("Segments")
+	val segments: List<ApiSegment?>? = null,
 
-	@field:SerializedName("Currencies")
-	val currencies: List<CurrenciesItem?>? = null,
+    @field:SerializedName("Currencies")
+	val currencies: List<ApiCurrency?>? = null,
 
-	@field:SerializedName("Places")
-	val places: List<Place?>? = null
+    @field:SerializedName("Places")
+	val places: List<ApiPlace?>? = null
 )

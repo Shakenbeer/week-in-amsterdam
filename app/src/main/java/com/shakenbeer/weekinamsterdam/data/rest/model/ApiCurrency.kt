@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CurrenciesItem(
+data class ApiCurrency(
 
 	@field:SerializedName("DecimalSeparator")
 	val decimalSeparator: String? = null,

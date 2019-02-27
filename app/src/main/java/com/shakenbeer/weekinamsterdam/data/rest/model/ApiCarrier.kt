@@ -2,13 +2,10 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Place(
+data class ApiCarrier(
 
-	@field:SerializedName("ParentId")
-	val parentId: Int? = null,
-
-	@field:SerializedName("Type")
-	val type: String? = null,
+	@field:SerializedName("ImageUrl")
+	val imageUrl: String? = null,
 
 	@field:SerializedName("Id")
 	val id: Int? = null,
@@ -17,5 +14,8 @@ data class Place(
 	val code: String? = null,
 
 	@field:SerializedName("Name")
-	val name: String? = null
+	val name: String? = null,
+
+	@field:SerializedName("DisplayCode")
+	val displayCode: String? = null
 )

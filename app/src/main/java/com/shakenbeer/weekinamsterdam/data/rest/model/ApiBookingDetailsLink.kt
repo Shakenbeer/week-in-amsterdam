@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class BookingDetailsLink(
+data class ApiBookingDetailsLink(
 
 	@field:SerializedName("Method")
 	val method: String? = null,

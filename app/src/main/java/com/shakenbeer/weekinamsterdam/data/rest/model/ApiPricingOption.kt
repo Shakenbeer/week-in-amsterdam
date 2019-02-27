@@ -2,7 +2,7 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class PricingOption(
+data class ApiPricingOption(
 
 	@field:SerializedName("DeeplinkUrl")
 	val deeplinkUrl: String? = null,
