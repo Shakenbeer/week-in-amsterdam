@@ -2,35 +2,35 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class FlightsResponse(
+class FlightsResponse(
 
-    @field:SerializedName("Status")
-	val status: String? = null,
+    @SerializedName("Status")
+	val status: String,
 
-    @field:SerializedName("Carriers")
-	val carriers: List<ApiCarrier?>? = null,
+    @SerializedName("Carriers")
+	val carriers: List<ApiCarrier>,
 
-    @field:SerializedName("Legs")
-	val legs: List<ApiLeg?>? = null,
+    @SerializedName("Legs")
+	val legs: List<ApiLeg>,
 
-    @field:SerializedName("Itineraries")
-	val itineraries: List<ApiItinerary?>? = null,
+    @SerializedName("Itineraries")
+	val itineraries: List<ApiItinerary>,
 
-    @field:SerializedName("Query")
-	val query: ApiQuery? = null,
+    @SerializedName("Query")
+	val query: ApiQuery,
 
-    @field:SerializedName("SessionKey")
-	val sessionKey: String? = null,
+    @SerializedName("SessionKey")
+	val sessionKey: String,
 
-    @field:SerializedName("Agents")
-	val agents: List<ApiAgent?>? = null,
+    @SerializedName("Agents")
+	val agents: List<ApiAgent>,
 
-    @field:SerializedName("Segments")
-	val segments: List<ApiSegment?>? = null,
+    @SerializedName("Segments")
+	val segments: List<ApiSegment>,
 
-    @field:SerializedName("Currencies")
-	val currencies: List<ApiCurrency?>? = null,
+    @SerializedName("Currencies")
+	val currencies: List<ApiCurrency>,
 
-    @field:SerializedName("Places")
-	val places: List<ApiPlace?>? = null
+    @SerializedName("Places")
+	val places: List<ApiPlace>
 )

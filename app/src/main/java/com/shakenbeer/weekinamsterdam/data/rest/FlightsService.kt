@@ -13,14 +13,14 @@ interface FlightsService {
     @FormUrlEncoded
     @POST("pricing/v1.0")
     fun createSession(
-        @Field("country") country: String = "DE",
-        @Field("currency") currency: String = "EUR",
-        @Field("locale") locale: String = "en",
-        @Field("originPlace") originPlace: String = "BERL-sky",
-        @Field("destinationPlace") destinationPlace: String = "AMST-sky",
-        @Field("cabinClass") cabinClass: String = "economy",
-        @Field("outboundDate") outboundDate: String = Calendar.getInstance().tomorrow(),
-        @Field("inboundDate") inboundDate: String = Calendar.getInstance().inWeek()
+        @Field("country") country: String,
+        @Field("currency") currency: String,
+        @Field("locale") locale: String,
+        @Field("originPlace") originPlace: String,
+        @Field("destinationPlace") destinationPlace: String,
+        @Field("cabinClass") cabinClass: String,
+        @Field("outboundDate") outboundDate: String,
+        @Field("inboundDate") inboundDate: String
     ): Call<Any>
 
     @Headers("X-RapidAPI-Key: 292a2901b1mshda87f2ee452e004p19997cjsn9b576deb0d04")

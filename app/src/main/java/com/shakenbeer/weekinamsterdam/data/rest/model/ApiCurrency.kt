@@ -2,29 +2,29 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiCurrency(
+class ApiCurrency(
 
-	@field:SerializedName("DecimalSeparator")
-	val decimalSeparator: String? = null,
+	@SerializedName("DecimalSeparator")
+	val decimalSeparator: String,
 
-	@field:SerializedName("ThousandsSeparator")
-	val thousandsSeparator: String? = null,
+	@SerializedName("ThousandsSeparator")
+	val thousandsSeparator: String,
 
-	@field:SerializedName("SymbolOnLeft")
-	val symbolOnLeft: Boolean? = null,
+	@SerializedName("SymbolOnLeft")
+	val symbolOnLeft: Boolean,
 
-	@field:SerializedName("SpaceBetweenAmountAndSymbol")
-	val spaceBetweenAmountAndSymbol: Boolean? = null,
+	@SerializedName("SpaceBetweenAmountAndSymbol")
+	val spaceBetweenAmountAndSymbol: Boolean,
 
-	@field:SerializedName("Symbol")
-	val symbol: String? = null,
+	@SerializedName("Symbol")
+	val symbol: String,
 
-	@field:SerializedName("DecimalDigits")
-	val decimalDigits: Int? = null,
+	@SerializedName("DecimalDigits")
+	val decimalDigits: Int,
 
-	@field:SerializedName("Code")
-	val code: String? = null,
+	@SerializedName("Code")
+	val code: String,
 
-	@field:SerializedName("RoundingCoefficient")
-	val roundingCoefficient: Int? = null
+	@SerializedName("RoundingCoefficient")
+	val roundingCoefficient: Int
 )

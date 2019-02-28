@@ -2,38 +2,38 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiSegment(
+class ApiSegment(
 
-	@field:SerializedName("Directionality")
-	val directionality: String? = null,
+	@SerializedName("Directionality")
+	val directionality: String,
 
-	@field:SerializedName("OriginStation")
-	val originStation: Int? = null,
+	@SerializedName("OriginStation")
+	val originStation: Int,
 
-	@field:SerializedName("DepartureDateTime")
-	val departureDateTime: String? = null,
+	@SerializedName("DepartureDateTime")
+	val departureDateTime: String,
 
-	@field:SerializedName("ArrivalDateTime")
-	val arrivalDateTime: String? = null,
+	@SerializedName("ArrivalDateTime")
+	val arrivalDateTime: String,
 
-	@field:SerializedName("JourneyMode")
-	val journeyMode: String? = null,
+	@SerializedName("JourneyMode")
+	val journeyMode: String,
 
-	@field:SerializedName("DestinationStation")
-	val destinationStation: Int? = null,
+	@SerializedName("DestinationStation")
+	val destinationStation: Int,
 
-	@field:SerializedName("OperatingCarrier")
-	val operatingCarrier: Int? = null,
+	@SerializedName("OperatingCarrier")
+	val operatingCarrier: Int,
 
-	@field:SerializedName("FlightNumber")
-	val flightNumber: String? = null,
+	@SerializedName("FlightNumber")
+	val flightNumber: String,
 
-	@field:SerializedName("Duration")
-	val duration: Int? = null,
+	@SerializedName("Duration")
+	val duration: Int,
 
-	@field:SerializedName("Id")
-	val id: Int? = null,
+	@SerializedName("Id")
+	val id: Int,
 
-	@field:SerializedName("Carrier")
-	val carrier: Int? = null
+	@SerializedName("Carrier")
+	val carrier: Int
 )

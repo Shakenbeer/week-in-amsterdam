@@ -2,11 +2,11 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiFlightNumber(
+class ApiFlightNumber(
 
-	@field:SerializedName("CarrierId")
-	val carrierId: Int? = null,
+	@SerializedName("CarrierId")
+	val carrierId: Int,
 
-	@field:SerializedName("FlightNumber")
-	val flightNumber: String? = null
+	@SerializedName("FlightNumber")
+	val flightNumber: String
 )

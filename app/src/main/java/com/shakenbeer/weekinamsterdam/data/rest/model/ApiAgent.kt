@@ -2,23 +2,23 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiAgent(
+class ApiAgent(
 
-	@field:SerializedName("Status")
-	val status: String? = null,
+	@SerializedName("Status")
+	val status: String,
 
-	@field:SerializedName("Type")
-	val type: String? = null,
+	@SerializedName("Type")
+	val type: String,
 
-	@field:SerializedName("ImageUrl")
-	val imageUrl: String? = null,
+	@SerializedName("ImageUrl")
+	val imageUrl: String,
 
-	@field:SerializedName("Id")
-	val id: Int? = null,
+	@SerializedName("Id")
+	val id: Int,
 
-	@field:SerializedName("OptimisedForMobile")
-	val optimisedForMobile: Boolean? = null,
+	@SerializedName("OptimisedForMobile")
+	val optimisedForMobile: Boolean,
 
-	@field:SerializedName("Name")
-	val name: String? = null
+	@SerializedName("Name")
+	val name: String
 )

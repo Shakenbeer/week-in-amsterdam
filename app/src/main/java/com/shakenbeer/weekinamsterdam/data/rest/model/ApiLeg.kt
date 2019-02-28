@@ -2,44 +2,44 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiLeg(
+class ApiLeg(
 
-    @field:SerializedName("SegmentIds")
-	val segmentIds: List<Int?>? = null,
+    @SerializedName("SegmentIds")
+	val segmentIds: List<Int>,
 
-    @field:SerializedName("Duration")
-	val duration: Int? = null,
+    @SerializedName("Duration")
+	val duration: Int,
 
-    @field:SerializedName("Arrival")
-	val arrival: String? = null,
+    @SerializedName("Arrival")
+	val arrival: String,
 
-    @field:SerializedName("Carriers")
-	val carriers: List<Int?>? = null,
+    @SerializedName("Carriers")
+	val carriers: List<Int>,
 
-    @field:SerializedName("Directionality")
-	val directionality: String? = null,
+    @SerializedName("Directionality")
+	val directionality: String,
 
-    @field:SerializedName("OriginStation")
-	val originStation: Int? = null,
+    @SerializedName("OriginStation")
+	val originStation: Int,
 
-    @field:SerializedName("Departure")
-	val departure: String? = null,
+    @SerializedName("Departure")
+	val departure: String,
 
-    @field:SerializedName("FlightNumbers")
-	val flightNumbers: List<ApiFlightNumber?>? = null,
+    @SerializedName("FlightNumbers")
+	val flightNumbers: List<ApiFlightNumber>,
 
-    @field:SerializedName("JourneyMode")
-	val journeyMode: String? = null,
+    @SerializedName("JourneyMode")
+	val journeyMode: String,
 
-    @field:SerializedName("DestinationStation")
-	val destinationStation: Int? = null,
+    @SerializedName("DestinationStation")
+	val destinationStation: Int,
 
-    @field:SerializedName("Stops")
-	val stops: List<Int?>? = null,
+    @SerializedName("Stops")
+	val stops: List<Int>,
 
-    @field:SerializedName("OperatingCarriers")
-	val operatingCarriers: List<Int?>? = null,
+    @SerializedName("OperatingCarriers")
+	val operatingCarriers: List<Int>,
 
-    @field:SerializedName("Id")
-	val id: String? = null
+    @SerializedName("Id")
+	val id: String
 )

@@ -2,20 +2,20 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiPlace(
+class ApiPlace(
 
-	@field:SerializedName("ParentId")
-	val parentId: Int? = null,
+	@SerializedName("ParentId")
+	val parentId: Int,
 
-	@field:SerializedName("Type")
-	val type: String? = null,
+	@SerializedName("Type")
+	val type: String,
 
-	@field:SerializedName("Id")
-	val id: Int? = null,
+	@SerializedName("Id")
+	val id: Int,
 
-	@field:SerializedName("Code")
-	val code: String? = null,
+	@SerializedName("Code")
+	val code: String,
 
-	@field:SerializedName("Name")
-	val name: String? = null
+	@SerializedName("Name")
+	val name: String
 )

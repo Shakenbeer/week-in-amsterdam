@@ -1,7 +1,8 @@
 package com.shakenbeer.weekinamsterdam.data
 
 import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Query
 
 interface FlightsSource {
-    fun flights(request: String): List<Flight>
+    fun topFlights(request: Query): List<Flight>
 }

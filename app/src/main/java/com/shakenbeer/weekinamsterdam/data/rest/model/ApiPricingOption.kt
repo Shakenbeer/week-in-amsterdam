@@ -2,17 +2,17 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiPricingOption(
+class ApiPricingOption(
 
-	@field:SerializedName("DeeplinkUrl")
-	val deeplinkUrl: String? = null,
+	@SerializedName("DeeplinkUrl")
+	val deeplinkUrl: String,
 
-	@field:SerializedName("Price")
-	val price: Double? = null,
+	@SerializedName("Price")
+	val price: Double,
 
-	@field:SerializedName("Agents")
-	val agents: List<Int?>? = null,
+	@SerializedName("Agents")
+	val agents: List<Int>,
 
-	@field:SerializedName("QuoteAgeInMinutes")
-	val quoteAgeInMinutes: Int? = null
+	@SerializedName("QuoteAgeInMinutes")
+	val quoteAgeInMinutes: Int
 )

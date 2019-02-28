@@ -2,44 +2,44 @@ package com.shakenbeer.weekinamsterdam.data.rest.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ApiQuery(
+class ApiQuery(
 
-	@field:SerializedName("Locale")
-	val locale: String? = null,
+	@SerializedName("Locale")
+	val locale: String,
 
-	@field:SerializedName("LocationSchema")
-	val locationSchema: String? = null,
+	@SerializedName("LocationSchema")
+	val locationSchema: String,
 
-	@field:SerializedName("Infants")
-	val infants: Int? = null,
+	@SerializedName("Infants")
+	val infants: Int,
 
-	@field:SerializedName("InboundDate")
-	val inboundDate: String? = null,
+	@SerializedName("InboundDate")
+	val inboundDate: String,
 
-	@field:SerializedName("OriginPlace")
-	val originPlace: String? = null,
+	@SerializedName("OriginPlace")
+	val originPlace: String,
 
-	@field:SerializedName("CabinClass")
-	val cabinClass: String? = null,
+	@SerializedName("CabinClass")
+	val cabinClass: String,
 
-	@field:SerializedName("Currency")
-	val currency: String? = null,
+	@SerializedName("Currency")
+	val currency: String,
 
-	@field:SerializedName("GroupPricing")
-	val groupPricing: Boolean? = null,
+	@SerializedName("GroupPricing")
+	val groupPricing: Boolean,
 
-	@field:SerializedName("Country")
-	val country: String? = null,
+	@SerializedName("Country")
+	val country: String,
 
-	@field:SerializedName("Adults")
-	val adults: Int? = null,
+	@SerializedName("Adults")
+	val adults: Int,
 
-	@field:SerializedName("Children")
-	val children: Int? = null,
+	@SerializedName("Children")
+	val children: Int,
 
-	@field:SerializedName("OutboundDate")
-	val outboundDate: String? = null,
+	@SerializedName("OutboundDate")
+	val outboundDate: String,
 
-	@field:SerializedName("DestinationPlace")
-	val destinationPlace: String? = null
+	@SerializedName("DestinationPlace")
+	val destinationPlace: String
 )
