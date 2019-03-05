@@ -1,11 +1,8 @@
 package com.shakenbeer.weekinamsterdam.data.rest
 
 import com.shakenbeer.weekinamsterdam.data.rest.model.FlightsResponse
-import com.shakenbeer.weekinamsterdam.inWeek
-import com.shakenbeer.weekinamsterdam.tomorrow
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface FlightsService {
 

@@ -1,20 +1,26 @@
 package com.shakenbeer.weekinamsterdam.domain.model
 
 class Leg(
-        val id: Int,
-        val airline: Airline,
-        val flightNumber: Int,
-        val departure: Long,
-        val arrival: Long,
+        val id: String,
+        val duration: Int,
         val origin: Airport,
-        val destination: Airport
+        val destination: Airport,
+        val departure: String,
+        val arrival: String,
+        val stops: Int
 ) {
-    val flyWith
-        get() = airline.name
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
 
-    val from
-        get() = origin.name
+        other as Leg
 
-    val to
-        get() = destination.name
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id.hashCode()
+    }
 }

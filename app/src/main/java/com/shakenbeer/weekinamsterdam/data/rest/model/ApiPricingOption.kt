@@ -8,7 +8,7 @@ class ApiPricingOption(
 	val deeplinkUrl: String,
 
 	@SerializedName("Price")
-	val price: Double,
+	val price: Float,
 
 	@SerializedName("Agents")
 	val agents: List<Int>,
