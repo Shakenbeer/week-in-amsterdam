@@ -20,7 +20,7 @@ class RemoteFlightsSource constructor(private val flightsService: FlightsService
         }
         val sessionResponse = sessionCall.execute()
         if (sessionResponse.isSuccessful) {
-            sessionResponse.headers()["Location"]?.let {
+            sessionResponse.headers().get("Location")?.let {
                 val sessionKey = it.split('/').last()
                 return flights(sessionKey, 0, 50)
             } ?: throw UnexpectedServerError()

@@ -18,7 +18,7 @@ interface FlightsService {
         @Field("cabinClass") cabinClass: String,
         @Field("outboundDate") outboundDate: String,
         @Field("inboundDate") inboundDate: String
-    ): Call<Any>
+    ): Call<String>
 
     @Headers("X-RapidAPI-Key: 292a2901b1mshda87f2ee452e004p19997cjsn9b576deb0d04")
     @GET("pricing/uk2/v1.0/{sessionkey}")

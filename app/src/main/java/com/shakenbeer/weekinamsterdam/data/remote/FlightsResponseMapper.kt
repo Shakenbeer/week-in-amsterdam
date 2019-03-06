@@ -30,14 +30,14 @@ object FlightsResponseMapper {
 
         val legMap: Map<String, Leg> = flightsResponse.legs.associate {
             Pair(it.id, Leg(it.id, it.duration, airportMap[it.originStation] ?: unknownAirport,
-                airportMap[it.originStation] ?: unknownAirport, it.departure, it.arrival, it.stops.size))
+                airportMap[it.destinationStation] ?: unknownAirport, it.departure, it.arrival, it.stops.size))
         }.filter { it.value.origin != unknownAirport && it.value.destination != unknownAirport }
 
         val agentMap: Map<Int, Supplier> = flightsResponse.agents.associate {
             Pair(it.id, Supplier(it.id, it.name))
         }
 
-        flightsResponse.itineraries.map { itinerary ->
+        return flightsResponse.itineraries.map { itinerary ->
             val cheapestOption = itinerary.pricingOptions.sortedBy { it.price }.first()
             Flight(
                 "${itinerary.outboundLegId};${itinerary.inboundLegId}",
@@ -47,8 +47,5 @@ object FlightsResponseMapper {
                 agentMap[cheapestOption.agents.first()] ?: unknownSupplier,
                 flightsResponse.query.cabinClass)
         }.filter { it.departLeg != unknownLeg && it.returnLeg != unknownLeg && it.supplier != unknownSupplier }
-
-
-        return emptyList()
     }
 }

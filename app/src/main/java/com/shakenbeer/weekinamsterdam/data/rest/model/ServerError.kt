@@ -1,3 +1,8 @@
 package com.shakenbeer.weekinamsterdam.data.rest.model
 
-class ServerError
+import com.google.gson.annotations.SerializedName
+
+class ServerError(
+	@SerializedName("ValidationErrors")
+	val validationErrors: List<ValidationError?>? = null
+)

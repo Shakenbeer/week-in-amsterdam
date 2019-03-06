@@ -1,0 +1,14 @@
+{
+  "ValidationErrors": [
+    {
+      "ParameterName": "OutboundDate",
+      "ParameterValue": "2019-01-01",
+      "Message": "Date in the past"
+    },
+    {
+      "ParameterName": "InboundDate",
+      "ParameterValue": "2019-01-10",
+      "Message": "Date in the past"
+    }
+  ]
+}
