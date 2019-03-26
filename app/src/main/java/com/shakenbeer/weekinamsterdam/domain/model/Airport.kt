@@ -1,6 +1,6 @@
 package com.shakenbeer.weekinamsterdam.domain.model
 
-class Airport(val id: Int, val name: String, val code: String) {
+class Airport(val id: Int, val name: String, val code: String, val city: String) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
