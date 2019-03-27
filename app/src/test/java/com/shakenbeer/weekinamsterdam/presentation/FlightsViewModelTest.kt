@@ -76,7 +76,7 @@ class FlightsViewModelTest {
         `when`(getNextWeekFlightsUseCase.execute()).thenReturn(flights)
         flightsViewModel.obtainFlights()
         assert(flightsViewModel.flightsLiveData.value is DisplayState)
-        assertEquals(flights.size, (flightsViewModel.flightsLiveData.value as DisplayState).flights.size)
+        assertEquals(flights.size, (flightsViewModel.flightsLiveData.value as DisplayState).itineraries.size)
     }
 
     @Test
@@ -124,9 +124,9 @@ class FlightsViewModelTest {
 
         val displayState = flightsViewModel.flightsLiveData.value as DisplayState
 
-        assertEquals(10, displayState.flights.size)
+        assertEquals(10, displayState.itineraries.size)
 
-        val viewFlightSlice = displayState.flights.filter { viewFlight ->
+        val viewFlightSlice = displayState.itineraries.filter { viewFlight ->
             viewFlight.id == "13495-1905011635--32571,-32756-1-9451-1905012140;" +
                     "9451-1905080720--32756,-32695-1-13495-1905081215" }
         assertTrue(viewFlightSlice.size == 1)
@@ -140,30 +140,30 @@ class FlightsViewModelTest {
         assertEquals("Economy", viewFlight.ticketClass)
         assertEquals(251.65f, viewFlight.cost)
 
-        assertEquals("LEJ", viewFlight.departSegment.originCode)
-        assertEquals("AMS", viewFlight.departSegment.destCode)
-        assertEquals("Leipzig", viewFlight.departSegment.originCity)
-        assertEquals("Amsterdam", viewFlight.departSegment.destCity)
-        assertEquals(1, viewFlight.departSegment.stops)
-        assertEquals("5h 5m", viewFlight.departSegment.duration)
-        assertEquals("1 May", viewFlight.departSegment.startDate)
-        assertEquals("Wed", viewFlight.departSegment.startDay)
-        assertEquals("16:35", viewFlight.departSegment.startTime)
-        assertEquals("1 May", viewFlight.departSegment.finishDate)
-        assertEquals("Wed", viewFlight.departSegment.finishDay)
-        assertEquals("21:40", viewFlight.departSegment.finishTime)
+        assertEquals("LEJ", viewFlight.departLeg.originCode)
+        assertEquals("AMS", viewFlight.departLeg.destCode)
+        assertEquals("Leipzig", viewFlight.departLeg.originCity)
+        assertEquals("Amsterdam", viewFlight.departLeg.destCity)
+        assertEquals(1, viewFlight.departLeg.stops)
+        assertEquals("5h 5m", viewFlight.departLeg.duration)
+        assertEquals("1 May", viewFlight.departLeg.startDate)
+        assertEquals("Wed", viewFlight.departLeg.startDay)
+        assertEquals("16:35", viewFlight.departLeg.startTime)
+        assertEquals("1 May", viewFlight.departLeg.finishDate)
+        assertEquals("Wed", viewFlight.departLeg.finishDay)
+        assertEquals("21:40", viewFlight.departLeg.finishTime)
 
-        assertEquals("AMS", viewFlight.returnSegment.originCode)
-        assertEquals("LEJ", viewFlight.returnSegment.destCode)
-        assertEquals("Amsterdam", viewFlight.returnSegment.originCity)
-        assertEquals("Leipzig", viewFlight.returnSegment.destCity)
-        assertEquals(1, viewFlight.returnSegment.stops)
-        assertEquals("4h 55m", viewFlight.returnSegment.duration)
-        assertEquals("8 May", viewFlight.returnSegment.startDate)
-        assertEquals("Wed", viewFlight.returnSegment.startDay)
-        assertEquals("07:20", viewFlight.returnSegment.startTime)
-        assertEquals("8 May", viewFlight.returnSegment.finishDate)
-        assertEquals("Wed", viewFlight.returnSegment.finishDay)
-        assertEquals("12:15", viewFlight.returnSegment.finishTime)
+        assertEquals("AMS", viewFlight.returnLeg.originCode)
+        assertEquals("LEJ", viewFlight.returnLeg.destCode)
+        assertEquals("Amsterdam", viewFlight.returnLeg.originCity)
+        assertEquals("Leipzig", viewFlight.returnLeg.destCity)
+        assertEquals(1, viewFlight.returnLeg.stops)
+        assertEquals("4h 55m", viewFlight.returnLeg.duration)
+        assertEquals("8 May", viewFlight.returnLeg.startDate)
+        assertEquals("Wed", viewFlight.returnLeg.startDay)
+        assertEquals("07:20", viewFlight.returnLeg.startTime)
+        assertEquals("8 May", viewFlight.returnLeg.finishDate)
+        assertEquals("Wed", viewFlight.returnLeg.finishDay)
+        assertEquals("12:15", viewFlight.returnLeg.finishTime)
     }
 }

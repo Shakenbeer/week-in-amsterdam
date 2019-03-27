@@ -4,7 +4,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.shakenbeer.weekinamsterdam.Utils.errorFromFile
 import com.shakenbeer.weekinamsterdam.data.remote.SkyscannerServerError
 import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Query
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -46,7 +46,7 @@ class RemoteFlightsRepoTest {
 
     @Test
     fun `check flights list` () {
-        val flights = listOf<Flight>()
+        val flights = listOf<Itinerary>()
         val request = Query(outboundDate = "2019-01-01", inboundDate = "2019-01-10")
         `when`(flightsSource.topFlights(request)).thenReturn(flights)
 

@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="flight"
-            type="com.shakenbeer.weekinamsterdam.presentation.model.ViewFlight" />
+            name="itinerary"
+            type="com.shakenbeer.weekinamsterdam.presentation.model.ItineraryView" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,7 @@
         android:layout_height="30dp">
 
         <TextView
-            android:text="@{@string/supplied_by(flight.supplier)}"
+            android:text="@{@string/supplied_by(itinerary.supplier)}"
             android:id="@+id/supplierTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -32,7 +32,7 @@
             tools:text="Supplied by: Air France" />
 
         <TextView
-            android:text="@{flight.ticketClass}"
+            android:text="@{itinerary.ticketClass}"
             android:id="@+id/classTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
             tools:text="Economy" />
 
         <TextView
-            android:text="@{@string/cost(flight.cost)}"
+            android:text="@{@string/cost(itinerary.cost)}"
             android:id="@+id/costTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

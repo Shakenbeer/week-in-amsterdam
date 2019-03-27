@@ -4,7 +4,7 @@ import com.shakenbeer.weekinamsterdam.data.FlightsSource
 import com.shakenbeer.weekinamsterdam.data.remote.FlightsResponseMapper.responseToFlights
 import com.shakenbeer.weekinamsterdam.data.rest.FlightsService
 import com.shakenbeer.weekinamsterdam.data.rest.model.ServerError
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Query
 import okhttp3.ResponseBody
 import retrofit2.Converter
@@ -13,7 +13,7 @@ import java.io.IOException
 class RemoteFlightsSource constructor(private val flightsService: FlightsService,
                                       private val errorConverter: Converter<ResponseBody, ServerError>) : FlightsSource {
 
-    override fun topFlights(request: Query): List<Flight> {
+    override fun topFlights(request: Query): List<Itinerary> {
         val sessionCall = request.run {
             flightsService.createSession(country, currency, locale, originPlace, destinationPlace, cabinClass,
                 outboundDate, inboundDate)
@@ -36,7 +36,7 @@ class RemoteFlightsSource constructor(private val flightsService: FlightsService
         }
     }
 
-    private fun flights(sessionKey: String, pageIndex: Int, pageSize: Int): List<Flight> {
+    private fun flights(sessionKey: String, pageIndex: Int, pageSize: Int): List<Itinerary> {
         val call = flightsService.getFlights(sessionKey, pageIndex, pageSize)
         val response = call.execute()
         if (response.isSuccessful) {

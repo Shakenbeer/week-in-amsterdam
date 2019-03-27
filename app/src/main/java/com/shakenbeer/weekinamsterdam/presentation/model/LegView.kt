@@ -1,6 +1,6 @@
 package com.shakenbeer.weekinamsterdam.presentation.model
 
-class ViewSegment {
+class LegView {
     var originCode: String = ""
     var originCity: String = ""
     var startDate: String = ""

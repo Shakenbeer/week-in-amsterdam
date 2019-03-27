@@ -7,7 +7,7 @@
 
         <variable
             name="obj"
-            type="com.shakenbeer.weekinamsterdam.presentation.model.ViewFlight" />
+            type="com.shakenbeer.weekinamsterdam.presentation.model.ItineraryView" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -26,21 +26,21 @@
 
             <include
                 layout="@layout/item_segment"
-                bind:segment="@{obj.departSegment}" />
+                bind:leg="@{obj.departLeg}" />
 
             <include
                 layout="@layout/item_segment"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
                 android:layout_marginTop="4dp"
-                bind:segment="@{obj.returnSegment}" />
+                bind:leg="@{obj.returnLeg}" />
 
             <include
                 layout="@layout/item_offer"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="2dp"
-                bind:flight="@{obj}" />
+                bind:itinerary="@{obj}" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>

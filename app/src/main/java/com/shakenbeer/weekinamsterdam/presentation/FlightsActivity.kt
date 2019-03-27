@@ -8,13 +8,13 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shakenbeer.weekinamsterdam.R
 import com.shakenbeer.weekinamsterdam.hide
-import com.shakenbeer.weekinamsterdam.presentation.model.ViewFlight
+import com.shakenbeer.weekinamsterdam.presentation.model.ItineraryView
 import com.shakenbeer.weekinamsterdam.show
 import kotlinx.android.synthetic.main.activity_flights.*
 
 class FlightsActivity : AppCompatActivity() {
 
-    private val adapter = FlightAdapter()
+    private val adapter = ItineraryAdapter()
     private lateinit var flightsViewModel: FlightsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +34,7 @@ class FlightsActivity : AppCompatActivity() {
                     is LoadingState -> showLoading()
                     is ErrorState -> showError(state.throwable)
                     is NoFlightsState -> showNoFlights()
-                    is DisplayState -> showFlights(state.flights)
+                    is DisplayState -> showFlights(state.itineraries)
                 }
             }
         })
@@ -78,11 +78,11 @@ class FlightsActivity : AppCompatActivity() {
         troubleTextView.setText(R.string.no_flights_found)
     }
 
-    private fun showFlights(flights: List<ViewFlight>) {
-        Log.d("FlightsActivity", "flights ${flights.size}")
+    private fun showFlights(itineraries: List<ItineraryView>) {
+        Log.d("FlightsActivity", "flights ${itineraries.size}")
         flightsRecyclerView.show()
         loading.hide()
         trouble.hide()
-        adapter.items = flights.toMutableList()
+        adapter.items = itineraries.toMutableList()
     }
 }

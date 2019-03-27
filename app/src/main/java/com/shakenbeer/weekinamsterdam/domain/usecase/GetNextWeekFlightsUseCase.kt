@@ -1,7 +1,7 @@
 package com.shakenbeer.weekinamsterdam.domain.usecase
 
 import androidx.annotation.VisibleForTesting
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Query
 import com.shakenbeer.weekinamsterdam.domain.repo.FlightsRepo
 import com.shakenbeer.weekinamsterdam.injection.ApplicationModule.Companion.REMOTE_REPO
@@ -15,7 +15,7 @@ class GetNextWeekFlightsUseCase
 
     private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
-    fun execute(): List<Flight> {
+    fun execute(): List<Itinerary> {
         val query = buildRequest(Calendar.getInstance())
         return flightsRepo.getTopFlights(query)
     }

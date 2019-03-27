@@ -3,7 +3,7 @@ package com.shakenbeer.weekinamsterdam.data.remote
 import com.shakenbeer.weekinamsterdam.data.rest.model.ApiPlace
 import com.shakenbeer.weekinamsterdam.data.rest.model.FlightsResponse
 import com.shakenbeer.weekinamsterdam.domain.model.Airport
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Leg
 import com.shakenbeer.weekinamsterdam.domain.model.Supplier
 
@@ -22,7 +22,7 @@ object FlightsResponseMapper {
     )
     private val unknownSupplier = Supplier(UNKNOWN_ID, "Unknown supplier")
 
-    fun responseToFlights(flightsResponse: FlightsResponse): List<Flight> {
+    fun responseToFlights(flightsResponse: FlightsResponse): List<Itinerary> {
 
         val cityMap: Map<Int, ApiPlace> = flightsResponse.places
             .filter { it.type == "City" }
@@ -60,7 +60,7 @@ object FlightsResponseMapper {
 
         return flightsResponse.itineraries.map { itinerary ->
             val cheapestOption = itinerary.pricingOptions.sortedBy { it.price }.first()
-            Flight(
+            Itinerary(
                 id = "${itinerary.outboundLegId};${itinerary.inboundLegId}",
                 departLeg = legMap[itinerary.outboundLegId] ?: unknownLeg,
                 returnLeg = legMap[itinerary.inboundLegId] ?: unknownLeg,

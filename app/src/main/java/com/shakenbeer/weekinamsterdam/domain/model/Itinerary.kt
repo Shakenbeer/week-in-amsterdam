@@ -1,6 +1,6 @@
 package com.shakenbeer.weekinamsterdam.domain.model
 
-class Flight(
+class Itinerary(
         val id: String,
         val departLeg: Leg,
         val returnLeg: Leg,

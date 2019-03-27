@@ -6,9 +6,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.shakenbeer.weekinamsterdam.Connectivity
 import com.shakenbeer.weekinamsterdam.WiaApplication
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
-import com.shakenbeer.weekinamsterdam.presentation.FlightMapper.flightToView
+import com.shakenbeer.weekinamsterdam.presentation.ItineraryMapper.flightToView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -48,7 +48,7 @@ class FlightsViewModel(application: Application) : AndroidViewModel(application)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .flatMapIterable { list -> list }
-            .map { flight: Flight -> flightToView(flight) }
+            .map { itinerary: Itinerary -> flightToView(itinerary) }
             .toList()
             .subscribe({ flights ->
                 if (flights.isNotEmpty()) {

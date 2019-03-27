@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import com.shakenbeer.weekinamsterdam.Utils.errorFromFile
 import com.shakenbeer.weekinamsterdam.data.remote.SkyscannerServerError
 import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
-import com.shakenbeer.weekinamsterdam.domain.model.Flight
+import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.repo.FlightsRepo
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -48,7 +48,7 @@ class GetNextWeekFlightsUseCaseTest {
 
     @Test
     fun `check flights list`() {
-        val flights = listOf<Flight>()
+        val flights = listOf<Itinerary>()
         `when`(flightsRepo.getTopFlights(any())).thenReturn(flights)
 
         val result = getNextWeekFlightsUseCase.execute()

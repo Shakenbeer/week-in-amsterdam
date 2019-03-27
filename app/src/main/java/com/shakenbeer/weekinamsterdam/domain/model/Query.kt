@@ -4,7 +4,7 @@ class Query(
     val country: String = "DE",
     val currency: String = "EUR",
     val locale: String = "en",
-    val originPlace: String = "BERL-sky",
+    val originPlace: String = "LEJ-sky",
     val destinationPlace: String = "AMST-sky",
     val cabinClass: String = "economy",
     val outboundDate: String,
