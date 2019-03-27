@@ -1,6 +1,5 @@
 package com.shakenbeer.weekinamsterdam.presentation
 
-import com.shakenbeer.weekinamsterdam.R
 import com.shakenbeer.weekinamsterdam.domain.model.Flight
 import com.shakenbeer.weekinamsterdam.presentation.model.ViewFlight
 import java.text.SimpleDateFormat
@@ -10,14 +9,18 @@ object FlightMapper {
 
     private val skyscannerDateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US)
 
-    private val timeFormatter = SimpleDateFormat("HH:mm", Locale.getDefault())
+    private val timeFormatter = SimpleDateFormat("HH:mm", Locale.US)
 
-    private val dayFormatter = SimpleDateFormat("EEE", Locale.getDefault())
+    private val dayFormatter = SimpleDateFormat("EEE", Locale.US)
 
-    private val dateFormatter = SimpleDateFormat("d MMM", Locale.getDefault())
+    private val dateFormatter = SimpleDateFormat("d MMM", Locale.US)
 
     fun flightToView(flight: Flight): ViewFlight {
         return ViewFlight(flight.id).apply {
+            supplier = flight.suppliedBy
+            ticketClass = flight.ticketClass.toLowerCase().capitalize()
+            cost = flight.cost
+
             with (flight.departLeg) {
                 departSegment.originCode = origin.code
                 departSegment.originCity = origin.city
@@ -27,7 +30,7 @@ object FlightMapper {
 
                 departSegment.destCode = destination.code
                 departSegment.destCity = destination.city
-                departSegment.finishDate = timeFrom(arrival)
+                departSegment.finishDate = dateFrom(arrival)
                 departSegment.finishDay = dayFrom(arrival)
                 departSegment.finishTime = timeFrom(arrival)
 
@@ -44,7 +47,7 @@ object FlightMapper {
 
                 returnSegment.destCode = destination.code
                 returnSegment.destCity = destination.city
-                returnSegment.finishDate = timeFrom(arrival)
+                returnSegment.finishDate = dateFrom(arrival)
                 returnSegment.finishDay = dayFrom(arrival)
                 returnSegment.finishTime = timeFrom(arrival)
 

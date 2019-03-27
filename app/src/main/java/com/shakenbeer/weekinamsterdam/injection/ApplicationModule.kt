@@ -2,9 +2,7 @@ package com.shakenbeer.weekinamsterdam.injection
 
 import android.content.Context
 import com.google.gson.GsonBuilder
-import com.shakenbeer.weekinamsterdam.BuildConfig
-import com.shakenbeer.weekinamsterdam.Const
-import com.shakenbeer.weekinamsterdam.WiaApplication
+import com.shakenbeer.weekinamsterdam.*
 import com.shakenbeer.weekinamsterdam.data.FlightsSource
 import com.shakenbeer.weekinamsterdam.data.RemoteFlightsRepo
 import com.shakenbeer.weekinamsterdam.data.remote.RemoteFlightsSource
@@ -30,6 +28,16 @@ internal class ApplicationModule(private val application: WiaApplication) {
     @Provides
     fun provideContext(): Context {
         return application
+    }
+
+    @Singleton
+    @Provides
+    fun provideConnectivity(): Connectivity {
+        return object : Connectivity {
+            override fun isConnectedToInternet(): Boolean {
+                return application.isConnectedToInterned()
+            }
+        }
     }
 
     @Singleton

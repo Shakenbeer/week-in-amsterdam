@@ -4,10 +4,10 @@ import android.app.Application
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.shakenbeer.weekinamsterdam.Connectivity
 import com.shakenbeer.weekinamsterdam.WiaApplication
 import com.shakenbeer.weekinamsterdam.domain.model.Flight
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
-import com.shakenbeer.weekinamsterdam.isConnectedToInterned
 import com.shakenbeer.weekinamsterdam.presentation.FlightMapper.flightToView
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,6 +19,9 @@ class FlightsViewModel(application: Application) : AndroidViewModel(application)
     @Inject
     lateinit var getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase
 
+    @Inject
+    lateinit var connectivity: Connectivity
+
     var flightsLiveData = MutableLiveData<FlightsViewState>()
 
     private var disposable: Disposable? = null
@@ -29,11 +32,11 @@ class FlightsViewModel(application: Application) : AndroidViewModel(application)
     }
 
     fun loadFlights() {
-        if (getApplication<WiaApplication>().isConnectedToInterned()) {
-            flightsLiveData.value = LoadingState()
+        if (connectivity.isConnectedToInternet()) {
+            flightsLiveData.value = LoadingState
             obtainFlights()
         } else {
-            flightsLiveData.value = NoInternetState()
+            flightsLiveData.value = NoInternetState
         }
     }
 
@@ -51,7 +54,7 @@ class FlightsViewModel(application: Application) : AndroidViewModel(application)
                 if (flights.isNotEmpty()) {
                     flightsLiveData.value = DisplayState(flights)
                 } else {
-                    flightsLiveData.value = NoFlightsState()
+                    flightsLiveData.value = NoFlightsState
                 }
             },
                 { throwable -> flightsLiveData.value = ErrorState(throwable) })

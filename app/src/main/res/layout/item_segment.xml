@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="segment"
+            type="com.shakenbeer.weekinamsterdam.presentation.model.ViewSegment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="#dd000000"
+            app:layout_constraintBottom_toBottomOf="@+id/planeImageView"
+            app:layout_constraintEnd_toStartOf="@+id/finishTimeTextView"
+            app:layout_constraintStart_toEndOf="@+id/planeImageView"
+            app:layout_constraintTop_toTopOf="@+id/planeImageView" />
+
+        <TextView
+            android:id="@+id/durationTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{segment.duration}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/finishDateTextView"
+            app:layout_constraintStart_toEndOf="@+id/startDateTextView"
+            app:layout_constraintTop_toBottomOf="@+id/stopsTextView"
+            tools:text="23h 30m" />
+
+        <TextView
+            android:id="@+id/destCodeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:text="@{segment.destCode}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#184893"
+            app:layout_constraintBottom_toTopOf="@+id/destCityTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="CPH" />
+
+        <TextView
+            android:id="@+id/destCityTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@{segment.destCity}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#184893"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/finishTimeTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Copenhagen" />
+
+        <TextView
+            android:id="@+id/finishDayTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="@{segment.finishDay}"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/finishTimeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/finishDateTextView"
+            tools:text="Sun" />
+
+        <TextView
+            android:id="@+id/finishDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:text="@{segment.finishDate}"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/finishTimeTextView"
+            app:layout_constraintTop_toTopOf="@+id/finishTimeTextView"
+            tools:text="26 Mar" />
+
+        <TextView
+            android:id="@+id/finishTimeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif"
+            android:includeFontPadding="false"
+            android:text="@{segment.finishTime}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/startTimeTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="16:00" />
+
+        <TextView
+            android:fontFamily="sans-serif"
+            android:id="@+id/startTimeTextView"
+            android:includeFontPadding="false"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:text="@{segment.startTime}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            android:textSize="26sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:layout_editor_absoluteY="37dp"
+            tools:text="16:00" />
+
+        <TextView
+            android:id="@+id/originCityTextView"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:text="@{segment.originCity}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#184893"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/startTimeTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Paris" />
+
+        <TextView
+            android:fontFamily="sans-serif"
+            android:id="@+id/originCodeTextView"
+            android:includeFontPadding="false"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:text="@{segment.originCode}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textColor="#184893"
+            app:layout_constraintBottom_toTopOf="@+id/originCityTextView"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="PAR" />
+
+        <TextView
+            android:id="@+id/startDayTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{segment.startDay}"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/startTimeTextView"
+            app:layout_constraintTop_toBottomOf="@+id/startDateTextView"
+            tools:text="Fri" />
+
+        <TextView
+            android:id="@+id/startDateTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="2dp"
+            android:text="@{segment.startDate}"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/startTimeTextView"
+            app:layout_constraintTop_toTopOf="@+id/startTimeTextView"
+            tools:text="24 Mar" />
+
+        <TextView
+            android:id="@+id/stopsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@{segment.stops == 0 ? @string/non_stop : @plurals/stops(segment.stops, segment.stops)}"
+            android:textAllCaps="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="#eb1c24"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toStartOf="@+id/finishTimeTextView"
+            app:layout_constraintStart_toEndOf="@+id/startTimeTextView"
+            app:layout_constraintTop_toTopOf="@+id/startDateTextView"
+            tools:text="1 stop" />
+
+        <ImageView
+            android:id="@+id/planeImageView"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:rotation="90"
+            app:layout_constraintBottom_toTopOf="@+id/stopsTextView"
+            app:layout_constraintEnd_toEndOf="@+id/stopsTextView"
+            app:layout_constraintStart_toStartOf="@+id/stopsTextView"
+            app:srcCompat="@drawable/airplane"
+            tools:ignore="ContentDescription" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="#dd000000"
+            app:layout_constraintBottom_toBottomOf="@+id/planeImageView"
+            app:layout_constraintEnd_toStartOf="@+id/planeImageView"
+            app:layout_constraintStart_toEndOf="@+id/startTimeTextView"
+            app:layout_constraintTop_toTopOf="@+id/planeImageView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

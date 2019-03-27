@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Week In Amsterdam</string>
+    <string name="loading">Loading</string>
+    <string name="retry">Retry</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="server_error">Server error</string>
+    <string name="no_flights_found">No flights found</string>
+    <string name="supplied_by">Supplied by: %s</string>
+    <string name="cost">€ %.2f</string>
+    <string name="non_stop">Non-stop</string>
+    <plurals name="stops">
+        <item quantity="one">1 stop</item>
+        <item quantity="other">%d stops</item>
+    </plurals>
 </resources>

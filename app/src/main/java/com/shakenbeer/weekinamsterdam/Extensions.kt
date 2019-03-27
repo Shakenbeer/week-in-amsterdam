@@ -6,8 +6,6 @@ import android.net.NetworkInfo
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import java.text.SimpleDateFormat
-import java.util.*
 
 fun View.hide() {
     this.visibility = GONE
