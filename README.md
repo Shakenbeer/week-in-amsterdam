@@ -173,6 +173,8 @@ Those are rear beasts... Or no? Imagine, you want to check the mapping between d
 #### UI tests
 **//TODO:** add ui tests to the project.
 
+**//TODO:** apply Kotlin DSL to Gradle files
+
 
 [1]: http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 [2]: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/viewmodel/GithubViewModelFactory.kt
