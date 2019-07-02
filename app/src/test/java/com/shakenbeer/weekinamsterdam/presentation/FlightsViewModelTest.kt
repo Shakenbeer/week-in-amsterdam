@@ -96,10 +96,10 @@ class FlightsViewModelTest {
     }
 
     @Test
-    fun `if momondo server error ther state is error`() {
+    fun `if scyscanner server error ther state is error`() {
         val serverError = Utils.errorFromFile("error_response.json")
-        val momondoServerError = SkyscannerServerError(serverError)
-        doAnswer { throw momondoServerError }.whenever(getNextWeekFlightsUseCase).execute()
+        val scyscannerServerError = SkyscannerServerError(serverError)
+        doAnswer { throw scyscannerServerError }.whenever(getNextWeekFlightsUseCase).execute()
         flightsViewModel.obtainFlights()
         assert(flightsViewModel.flightsLiveData.value is ErrorState)
     }

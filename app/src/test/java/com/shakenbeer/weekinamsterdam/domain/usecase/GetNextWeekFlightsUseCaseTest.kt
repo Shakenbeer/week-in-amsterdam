@@ -32,7 +32,7 @@ class GetNextWeekFlightsUseCaseTest {
     }
 
     @Test(expected = SkyscannerServerError::class)
-    fun `if repo throws momondo error then throw momondo error`() {
+    fun `if repo throws skyscanner error then throw skyscanner error`() {
         val serverError = errorFromFile("error_response.json")
         val skyscannerServerError = SkyscannerServerError(serverError)
         doAnswer { throw skyscannerServerError }.whenever(flightsRepo).getTopFlights(any())
