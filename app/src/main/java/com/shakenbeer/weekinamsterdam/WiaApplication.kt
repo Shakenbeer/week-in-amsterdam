@@ -1,15 +1,19 @@
 package com.shakenbeer.weekinamsterdam
 
 import android.app.Application
-import com.shakenbeer.weekinamsterdam.injection.ApplicationComponent
-import com.shakenbeer.weekinamsterdam.injection.ApplicationModule
-import com.shakenbeer.weekinamsterdam.injection.DaggerApplicationComponent
+import com.shakenbeer.weekinamsterdam.injection.appModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 class WiaApplication : Application() {
 
-    val component: ApplicationComponent by lazy {
-        DaggerApplicationComponent.builder()
-            .applicationModule(ApplicationModule(this))
-            .build()
+    override fun onCreate() {
+        super.onCreate()
+        startKoin{
+            androidLogger()
+            androidContext(this@WiaApplication)
+            modules(appModule)
+        }
     }
 }

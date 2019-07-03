@@ -4,14 +4,10 @@ import androidx.annotation.VisibleForTesting
 import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Query
 import com.shakenbeer.weekinamsterdam.domain.repo.FlightsRepo
-import com.shakenbeer.weekinamsterdam.injection.ApplicationModule.Companion.REMOTE_REPO
 import java.text.SimpleDateFormat
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Named
 
-class GetNextWeekFlightsUseCase
-@Inject constructor(@Named(REMOTE_REPO) private val flightsRepo: FlightsRepo) {
+class GetNextWeekFlightsUseCase(private val flightsRepo: FlightsRepo) {
 
     private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 

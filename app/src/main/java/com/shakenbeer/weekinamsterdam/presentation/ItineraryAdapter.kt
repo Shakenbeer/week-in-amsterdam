@@ -2,9 +2,8 @@ package com.shakenbeer.weekinamsterdam.presentation
 
 import com.shakenbeer.weekinamsterdam.R
 import com.shakenbeer.weekinamsterdam.ui.BaseBindingAdapter
-import javax.inject.Inject
 
-class ItineraryAdapter @Inject constructor(): BaseBindingAdapter() {
+class ItineraryAdapter: BaseBindingAdapter() {
 
     override fun getObjForPosition(position: Int) = items[position]
 

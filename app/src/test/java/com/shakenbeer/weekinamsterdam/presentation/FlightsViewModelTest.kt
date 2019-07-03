@@ -4,14 +4,12 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.doAnswer
 import com.nhaarman.mockitokotlin2.whenever
 import com.shakenbeer.weekinamsterdam.Connectivity
-import com.shakenbeer.weekinamsterdam.WiaApplication
 import com.shakenbeer.weekinamsterdam.Utils
 import com.shakenbeer.weekinamsterdam.Utils.responseFromFile
 import com.shakenbeer.weekinamsterdam.data.remote.FlightsResponseMapper.responseToFlights
 import com.shakenbeer.weekinamsterdam.data.remote.SkyscannerServerError
 import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
-import com.shakenbeer.weekinamsterdam.injection.ApplicationComponent
 import io.reactivex.Scheduler
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.internal.schedulers.ExecutorScheduler
@@ -39,7 +37,7 @@ class FlightsViewModelTest {
     lateinit var getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase
 
     @Mock
-    lateinit var wiaApplication: WiaApplication
+    lateinit var connectivity: Connectivity
 
     private lateinit var flightsViewModel: FlightsViewModel
 
@@ -58,15 +56,7 @@ class FlightsViewModelTest {
         RxJavaPlugins.setInitSingleSchedulerHandler { immediate }
         RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediate }
 
-        `when`(wiaApplication.component).thenReturn(object : ApplicationComponent {
-            override fun inject(flightsViewModel: FlightsViewModel) {
-                flightsViewModel.getNextWeekFlightsUseCase = getNextWeekFlightsUseCase
-                flightsViewModel.connectivity = object : Connectivity {
-                    override fun isConnectedToInternet() = true
-                }
-            }
-        })
-        flightsViewModel = FlightsViewModel(wiaApplication)
+        flightsViewModel = FlightsViewModel(getNextWeekFlightsUseCase, connectivity)
     }
 
     //TODO this is integration test because of FlightsResponseMapper.responseToFlights
@@ -88,9 +78,7 @@ class FlightsViewModelTest {
 
     @Test
     fun `if no internet then show no internet` () {
-        flightsViewModel.connectivity = object : Connectivity {
-            override fun isConnectedToInternet() = false
-        }
+        `when`(connectivity.isConnectedToInternet()).thenReturn(false)
         flightsViewModel.loadFlights()
         assert(flightsViewModel.flightsLiveData.value is NoInternetState)
     }

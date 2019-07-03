@@ -4,18 +4,18 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.shakenbeer.weekinamsterdam.R
 import com.shakenbeer.weekinamsterdam.hide
 import com.shakenbeer.weekinamsterdam.presentation.model.ItineraryView
 import com.shakenbeer.weekinamsterdam.show
 import kotlinx.android.synthetic.main.activity_flights.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class FlightsActivity : AppCompatActivity() {
 
     private val adapter = ItineraryAdapter()
-    private lateinit var flightsViewModel: FlightsViewModel
+    private val flightsViewModel: FlightsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,8 +23,6 @@ class FlightsActivity : AppCompatActivity() {
 
         flightsRecyclerView.layoutManager = LinearLayoutManager(this)
         flightsRecyclerView.adapter = adapter
-
-        flightsViewModel = ViewModelProviders.of(this).get(FlightsViewModel::class.java)
 
         flightsViewModel.flightsLiveData.observe(this, Observer { state ->
             swipeRefreshLayout.isRefreshing = false
@@ -61,7 +59,7 @@ class FlightsActivity : AppCompatActivity() {
     }
 
     private fun showError(throwable: Throwable) {
-        Log.d("FlightsActivity", "Error")
+        Log.d("FlightsActivity", "Error: ${throwable.localizedMessage}")
         flightsRecyclerView.hide()
         loading.hide()
         trouble.show()

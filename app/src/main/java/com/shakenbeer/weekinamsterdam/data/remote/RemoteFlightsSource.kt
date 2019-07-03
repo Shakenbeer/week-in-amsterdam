@@ -10,13 +10,17 @@ import okhttp3.ResponseBody
 import retrofit2.Converter
 import java.io.IOException
 
-class RemoteFlightsSource constructor(private val flightsService: FlightsService,
-                                      private val errorConverter: Converter<ResponseBody, ServerError>) : FlightsSource {
+class RemoteFlightsSource(
+    private val flightsService: FlightsService,
+    private val errorConverter: Converter<ResponseBody, ServerError>
+) : FlightsSource {
 
     override fun topFlights(request: Query): List<Itinerary> {
         val sessionCall = request.run {
-            flightsService.createSession(country, currency, locale, originPlace, destinationPlace, cabinClass,
-                outboundDate, inboundDate)
+            flightsService.createSession(
+                country, currency, locale, originPlace, destinationPlace, cabinClass,
+                outboundDate, inboundDate
+            )
         }
         val sessionResponse = sessionCall.execute()
         if (sessionResponse.isSuccessful) {

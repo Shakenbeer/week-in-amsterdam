@@ -1,11 +1,9 @@
 package com.shakenbeer.weekinamsterdam.presentation
 
-import android.app.Application
 import androidx.annotation.VisibleForTesting
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.shakenbeer.weekinamsterdam.Connectivity
-import com.shakenbeer.weekinamsterdam.WiaApplication
 import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
 import com.shakenbeer.weekinamsterdam.presentation.ItineraryMapper.flightToView
@@ -13,21 +11,17 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import javax.inject.Inject
 
-class FlightsViewModel(application: Application) : AndroidViewModel(application) {
-    @Inject
-    lateinit var getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase
-
-    @Inject
-    lateinit var connectivity: Connectivity
+class FlightsViewModel(
+    private val getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase,
+    private val connectivity: Connectivity
+) : ViewModel() {
 
     var flightsLiveData = MutableLiveData<FlightsViewState>()
 
     private var disposable: Disposable? = null
 
     init {
-        (application as WiaApplication).component.inject(this)
         loadFlights()
     }
 
