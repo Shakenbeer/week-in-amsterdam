@@ -10,10 +10,8 @@ import com.shakenbeer.weekinamsterdam.data.remote.FlightsResponseMapper.response
 import com.shakenbeer.weekinamsterdam.data.remote.SkyscannerServerError
 import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
-import io.reactivex.Scheduler
-import io.reactivex.android.plugins.RxAndroidPlugins
-import io.reactivex.internal.schedulers.ExecutorScheduler
-import io.reactivex.plugins.RxJavaPlugins
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -23,15 +21,18 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
-import java.util.concurrent.Executor
 
 
 @RunWith(MockitoJUnitRunner::class)
 class FlightsViewModelTest {
 
-    @Rule
-    @JvmField
-    val rule = InstantTaskExecutorRule()
+    @ExperimentalCoroutinesApi
+    @get:Rule
+    var coroutinesTestRule = CoroutinesTestRule()
+
+    // Executes each task synchronously using Architecture Components.
+    @get:Rule
+    val instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Mock
     lateinit var getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase
@@ -41,22 +42,12 @@ class FlightsViewModelTest {
 
     private lateinit var flightsViewModel: FlightsViewModel
 
+    @ExperimentalCoroutinesApi
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        val immediate = object : Scheduler() {
-            override fun createWorker(): Worker {
-                return ExecutorScheduler.ExecutorWorker(Executor { it.run() })
-            }
-        }
-
-        RxJavaPlugins.setInitIoSchedulerHandler { immediate }
-        RxJavaPlugins.setInitComputationSchedulerHandler { immediate }
-        RxJavaPlugins.setInitNewThreadSchedulerHandler { immediate }
-        RxJavaPlugins.setInitSingleSchedulerHandler { immediate }
-        RxAndroidPlugins.setInitMainThreadSchedulerHandler { immediate }
-
         flightsViewModel = FlightsViewModel(getNextWeekFlightsUseCase, connectivity)
+        flightsViewModel.ioDispatcher = Dispatchers.Unconfined
     }
 
     //TODO this is integration test because of FlightsResponseMapper.responseToFlights
@@ -69,6 +60,7 @@ class FlightsViewModelTest {
         assertEquals(flights.size, (flightsViewModel.flightsLiveData.value as DisplayState).itineraries.size)
     }
 
+    @ExperimentalCoroutinesApi
     @Test
     fun `if no flights then show no flights`() {
         `when`(getNextWeekFlightsUseCase.execute()).thenReturn(emptyList())
@@ -84,7 +76,7 @@ class FlightsViewModelTest {
     }
 
     @Test
-    fun `if scyscanner server error ther state is error`() {
+    fun `if scyscanner server error then state is error`() {
         val serverError = Utils.errorFromFile("error_response.json")
         val scyscannerServerError = SkyscannerServerError(serverError)
         doAnswer { throw scyscannerServerError }.whenever(getNextWeekFlightsUseCase).execute()

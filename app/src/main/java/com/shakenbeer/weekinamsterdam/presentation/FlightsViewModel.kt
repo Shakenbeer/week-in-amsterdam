@@ -3,23 +3,24 @@ package com.shakenbeer.weekinamsterdam.presentation
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.shakenbeer.weekinamsterdam.Connectivity
-import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
-import com.shakenbeer.weekinamsterdam.presentation.ItineraryMapper.flightToView
-import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.shakenbeer.weekinamsterdam.presentation.ItineraryMapper.itineraryToView
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FlightsViewModel(
     private val getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase,
     private val connectivity: Connectivity
 ) : ViewModel() {
 
-    var flightsLiveData = MutableLiveData<FlightsViewState>()
+    val flightsLiveData = MutableLiveData<FlightsViewState>()
 
-    private var disposable: Disposable? = null
+    //We need property for Dispatchers.IO to replace it in tests
+    //until issue https://github.com/Kotlin/kotlinx.coroutines/issues/982 fixed
+    var ioDispatcher = Dispatchers.IO
 
     init {
         loadFlights()
@@ -37,25 +38,20 @@ class FlightsViewModel(
     @Suppress("MemberVisibilityCanBePrivate")
     @VisibleForTesting
     internal fun obtainFlights() {
-        disposable?.dispose()
-        disposable = Observable.fromCallable { getNextWeekFlightsUseCase.execute() }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .flatMapIterable { list -> list }
-            .map { itinerary: Itinerary -> flightToView(itinerary) }
-            .toList()
-            .subscribe({ flights ->
-                if (flights.isNotEmpty()) {
-                    flightsLiveData.value = DisplayState(flights)
-                } else {
-                    flightsLiveData.value = NoFlightsState
+        viewModelScope.launch {
+            try {
+                withContext(ioDispatcher) {
+                    getNextWeekFlightsUseCase.execute()
+                }.map { itineraryToView(it) }.let {
+                    if (it.isNotEmpty()) {
+                        flightsLiveData.value = DisplayState(it)
+                    } else {
+                        flightsLiveData.value = NoFlightsState
+                    }
                 }
-            },
-                { throwable -> flightsLiveData.value = ErrorState(throwable) })
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable?.dispose()
+            } catch (t: Throwable) {
+                flightsLiveData.value = ErrorState(t)
+            }
+        }
     }
 }

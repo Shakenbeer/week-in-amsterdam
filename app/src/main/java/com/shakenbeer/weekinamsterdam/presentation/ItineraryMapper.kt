@@ -15,7 +15,7 @@ object ItineraryMapper {
 
     private val dateFormatter = SimpleDateFormat("d MMM", Locale.US)
 
-    fun flightToView(itinerary: Itinerary): ItineraryView {
+    fun itineraryToView(itinerary: Itinerary): ItineraryView {
         return ItineraryView(itinerary.id).apply {
             supplier = itinerary.suppliedBy
             ticketClass = itinerary.ticketClass.toLowerCase().capitalize()
