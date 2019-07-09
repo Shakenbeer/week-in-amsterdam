@@ -9,7 +9,6 @@ import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
 import com.shakenbeer.weekinamsterdam.presentation.ItineraryMapper.itineraryToView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class FlightsViewModel(
     private val getNextWeekFlightsUseCase: GetNextWeekFlightsUseCase,
@@ -40,15 +39,14 @@ class FlightsViewModel(
     internal fun obtainFlights() {
         viewModelScope.launch {
             try {
-                withContext(ioDispatcher) {
-                    getNextWeekFlightsUseCase.execute()
-                }.map { itineraryToView(it) }.let {
-                    if (it.isNotEmpty()) {
-                        flightsLiveData.value = DisplayState(it)
-                    } else {
-                        flightsLiveData.value = NoFlightsState
+                getNextWeekFlightsUseCase.execute()
+                    .map { itineraryToView(it) }.let {
+                        if (it.isNotEmpty()) {
+                            flightsLiveData.value = DisplayState(it)
+                        } else {
+                            flightsLiveData.value = NoFlightsState
+                        }
                     }
-                }
             } catch (t: Throwable) {
                 flightsLiveData.value = ErrorState(t)
             }

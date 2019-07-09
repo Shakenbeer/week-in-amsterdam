@@ -15,7 +15,7 @@ class RemoteFlightsSource(
     private val errorConverter: Converter<ResponseBody, ServerError>
 ) : FlightsSource {
 
-    override fun topFlights(request: Query): List<Itinerary> {
+    override suspend fun topFlights(request: Query): List<Itinerary> {
         val sessionCall = request.run {
             flightsService.createSession(
                 country, currency, locale, originPlace, destinationPlace, cabinClass,
@@ -31,8 +31,8 @@ class RemoteFlightsSource(
         } else {
             sessionResponse.errorBody()?.let {
                 try {
-                    val serverError = errorConverter.convert(it)
-                    throw SkyscannerServerError(serverError)
+                    errorConverter.convert(it)
+                        ?.let {serverError -> throw SkyscannerServerError(serverError)}
                 } catch (e: IOException) {
                     throw UnexpectedServerError()
                 }
@@ -40,7 +40,7 @@ class RemoteFlightsSource(
         }
     }
 
-    private fun flights(sessionKey: String, pageIndex: Int, pageSize: Int): List<Itinerary> {
+    private suspend fun flights(sessionKey: String, pageIndex: Int, pageSize: Int): List<Itinerary> {
         val call = flightsService.getFlights(sessionKey, pageIndex, pageSize)
         val response = call.execute()
         if (response.isSuccessful) {
@@ -49,8 +49,8 @@ class RemoteFlightsSource(
         } else {
             response.errorBody()?.let {
                 try {
-                    val serverError = errorConverter.convert(it)
-                    throw SkyscannerServerError(serverError)
+                    errorConverter.convert(it)
+                        ?.let {serverError -> throw SkyscannerServerError(serverError)}
                 } catch (e: IOException) {
                     throw UnexpectedServerError()
                 }

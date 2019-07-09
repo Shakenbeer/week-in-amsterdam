@@ -12,6 +12,7 @@ import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
 import com.shakenbeer.weekinamsterdam.domain.usecase.GetNextWeekFlightsUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -52,7 +53,7 @@ class FlightsViewModelTest {
 
     //TODO this is integration test because of FlightsResponseMapper.responseToFlights
     @Test
-    fun `check number of flights`() {
+    fun `check number of flights`()= runBlockingTest {
         val flights = responseToFlights(responseFromFile("proper_1st_page_results.json"))
         `when`(getNextWeekFlightsUseCase.execute()).thenReturn(flights)
         flightsViewModel.obtainFlights()
@@ -62,21 +63,21 @@ class FlightsViewModelTest {
 
     @ExperimentalCoroutinesApi
     @Test
-    fun `if no flights then show no flights`() {
+    fun `if no flights then show no flights`()= runBlockingTest {
         `when`(getNextWeekFlightsUseCase.execute()).thenReturn(emptyList())
         flightsViewModel.obtainFlights()
         assert(flightsViewModel.flightsLiveData.value is NoFlightsState)
     }
 
     @Test
-    fun `if no internet then show no internet` () {
+    fun `if no internet then show no internet` ()= runBlockingTest {
         `when`(connectivity.isConnectedToInternet()).thenReturn(false)
         flightsViewModel.loadFlights()
         assert(flightsViewModel.flightsLiveData.value is NoInternetState)
     }
 
     @Test
-    fun `if scyscanner server error then state is error`() {
+    fun `if scyscanner server error then state is error`()= runBlockingTest {
         val serverError = Utils.errorFromFile("error_response.json")
         val scyscannerServerError = SkyscannerServerError(serverError)
         doAnswer { throw scyscannerServerError }.whenever(getNextWeekFlightsUseCase).execute()
@@ -85,7 +86,7 @@ class FlightsViewModelTest {
     }
 
     @Test
-    fun `if unexpected server error then state is error`() {
+    fun `if unexpected server error then state is error`()= runBlockingTest {
         doAnswer { throw UnexpectedServerError() }.whenever(getNextWeekFlightsUseCase).execute()
         flightsViewModel.obtainFlights()
         assert(flightsViewModel.flightsLiveData.value is ErrorState)
@@ -93,7 +94,7 @@ class FlightsViewModelTest {
 
     //TODO this is integration test because of FlightsResponseMapper.responseToFlights
     @Test
-    fun `verify conversion of a flight`() {
+    fun `verify conversion of a flight`()= runBlockingTest {
         val flights = responseToFlights(responseFromFile("proper_1st_page_results.json"))
 
         `when`(getNextWeekFlightsUseCase.execute()).thenReturn(flights)

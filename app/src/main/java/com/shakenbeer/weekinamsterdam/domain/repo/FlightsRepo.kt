@@ -4,5 +4,5 @@ import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.model.Query
 
 interface FlightsRepo {
-    fun getTopFlights(request: Query): List<Itinerary>
+    suspend fun getTopFlights(request: Query): List<Itinerary>
 }

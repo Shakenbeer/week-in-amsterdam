@@ -8,6 +8,7 @@ import com.shakenbeer.weekinamsterdam.data.remote.SkyscannerServerError
 import com.shakenbeer.weekinamsterdam.data.remote.UnexpectedServerError
 import com.shakenbeer.weekinamsterdam.domain.model.Itinerary
 import com.shakenbeer.weekinamsterdam.domain.repo.FlightsRepo
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -32,7 +33,7 @@ class GetNextWeekFlightsUseCaseTest {
     }
 
     @Test(expected = SkyscannerServerError::class)
-    fun `if repo throws skyscanner error then throw skyscanner error`() {
+    fun `if repo throws skyscanner error then throw skyscanner error`() = runBlockingTest{
         val serverError = errorFromFile("error_response.json")
         val skyscannerServerError = SkyscannerServerError(serverError)
         doAnswer { throw skyscannerServerError }.whenever(flightsRepo).getTopFlights(any())
@@ -41,13 +42,13 @@ class GetNextWeekFlightsUseCaseTest {
     }
 
     @Test(expected = UnexpectedServerError::class)
-    fun `if repo throws unexpected error then throw unexpected error`() {
+    fun `if repo throws unexpected error then throw unexpected error`()= runBlockingTest {
         doAnswer { throw UnexpectedServerError() }.whenever(flightsRepo).getTopFlights(any())
         getNextWeekFlightsUseCase.execute()
     }
 
     @Test
-    fun `check flights list`() {
+    fun `check flights list`() = runBlockingTest{
         val flights = listOf<Itinerary>()
         `when`(flightsRepo.getTopFlights(any())).thenReturn(flights)
 

@@ -9,7 +9,7 @@ interface FlightsService {
     @Headers("X-RapidAPI-Key: 292a2901b1mshda87f2ee452e004p19997cjsn9b576deb0d04")
     @FormUrlEncoded
     @POST("pricing/v1.0")
-    fun createSession(
+    suspend fun createSession(
         @Field("country") country: String,
         @Field("currency") currency: String,
         @Field("locale") locale: String,
@@ -22,7 +22,7 @@ interface FlightsService {
 
     @Headers("X-RapidAPI-Key: 292a2901b1mshda87f2ee452e004p19997cjsn9b576deb0d04")
     @GET("pricing/uk2/v1.0/{sessionkey}")
-    fun getFlights(
+    suspend fun getFlights(
         @Path("sessionkey") sessionKey: String,
         @Query("pageIndex") pageIndex: Int = 0,
         @Query("pageSize") pageSize: Int = 50

@@ -6,6 +6,7 @@ import com.shakenbeer.weekinamsterdam.Utils.responseFromFile
 import com.shakenbeer.weekinamsterdam.data.rest.FlightsService
 import com.shakenbeer.weekinamsterdam.data.rest.model.ServerError
 import com.shakenbeer.weekinamsterdam.domain.model.Query
+import kotlinx.coroutines.test.runBlockingTest
 import okhttp3.*
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -40,7 +41,7 @@ class RemoteFlightsSourceTest {
     }
 
     @Test(expected = SkyscannerServerError::class)
-    fun `if bad request then throw scyscanner error`() {
+    fun `if bad request then throw scyscanner error`() = runBlockingTest {
         val error = jsonStringFromFile("error_response.json")
         val call = Calls.response(
                 Response.error<String>(
@@ -53,7 +54,7 @@ class RemoteFlightsSourceTest {
     }
 
     @Test(expected = UnexpectedServerError::class)
-    fun `if server error then throw unexpected error`() {
+    fun `if server error then throw unexpected error`() = runBlockingTest{
         val call = Calls.response(Response.error<String>(500,
                 ResponseBody.create(MediaType.parse("text/plain"), "Unexpected server error response")))
         val request = Query(outboundDate = "2019-01-01", inboundDate = "2019-01-10")
@@ -63,7 +64,7 @@ class RemoteFlightsSourceTest {
     }
 
     @Test
-    fun `check success request mapping`() {
+    fun `check success request mapping`() = runBlockingTest {
         val sessionKey = "02bd7f4a-eb42-4264-b5e0-854a7df97cf7"
         val sessionCall = Calls.response(Response.success("{}", okhttp3.Response.Builder() //
             .code(201)

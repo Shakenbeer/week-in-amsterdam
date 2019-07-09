@@ -11,7 +11,7 @@ class GetNextWeekFlightsUseCase(private val flightsRepo: FlightsRepo) {
 
     private val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.US)
 
-    fun execute(): List<Itinerary> {
+    suspend fun execute(): List<Itinerary> {
         val query = buildRequest(Calendar.getInstance())
         return flightsRepo.getTopFlights(query)
     }
