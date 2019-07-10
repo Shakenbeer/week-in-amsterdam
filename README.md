@@ -18,18 +18,7 @@ It seems natural to put something with _repo_ in name to the data layer. But, an
 Implementation of `FlightsRepo` is in `data`, though. But `domain` knows nothing about it.
 
 #### Dependency injection
-Dependency injection simplifies following clean architecture approach. Dagger 2 is a current choice for DI framework.
-
-It's worth to mention, that I'm "starting" injection from the view model. Why? As you know, `ViewModel` should be provided by `ViewModelProvider`, and, to initialize injection in Activity(Fragment) one should use a custom factory. You've probably seen [this implementation][2] already. Personally, I found this code confusing and ugly, but it's only a matter of taste. So, I initialize injection in `ViewModel`. The only disadvantage is that I need `AndroidViewModel`.
-```kotlin
-class FlightsViewModel(application: Application) : AndroidViewModel(application) {
-    init {
-            (application as WiaApplication).component.inject(this)
-            loadFlights()
-    }
-}    
-```    
-**//TODO:** replace Dagger with Koin and rid of `AndroidViewModel`.
+Dependency injection simplifies following clean architecture approach. Koin and Dagger 2 are current choices for DI framework. ((Dagger 2 usage could be found in branch [`rxjava-dagger`][4]))
 
 #### Data
 Again, it's a matter of taste - how you implement data layer. I'm going to roughly describe my approach.
@@ -46,9 +35,7 @@ MVVM on Architecture components from Android. I believe this is the most conveni
 
 I'm going to briefly describe my approach.
 
-`ViewModel` executes `UseCase` asynchronously. This is the place where I prefer to make operations (i/o mostly) async. At the moment I use RxJava for this. I'm aware of this overkill, so that's a room for another
-
-**//TODO:** replace RxJava with coroutines.
+`ViewModel` executes `UseCase` asynchronously. This is the place where I prefer to make operations (i/o mostly) async. At the moment I use coroutines or RxJava for this. (RxJava usage could be found in branch [`rxjava-dagger`][4]) 
 
 On every user action, intermediate stage or final result `LiveData` emits `ViewState`. In other words, on everything, that should be presented to the user in some way, `LiveData` propagates `ViewState`. `ViewState` is a sealed class, which descendants represent one particular screen of a current feature. Perhaps code says more:
 ```kotlin
@@ -179,3 +166,4 @@ Those are rear beasts... Or no? Imagine, you want to check the mapping between d
 [1]: http://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html
 [2]: https://github.com/googlesamples/android-architecture-components/blob/master/GithubBrowserSample/app/src/main/java/com/android/example/github/viewmodel/GithubViewModelFactory.kt
 [3]: https://proandroiddev.com/android-clean-architecture-with-viewmodel-usecases-and-repositories-part-1-b9e63889a1aa
+[4]: https://github.com/Shakenbeer/week-in-amsterdam/tree/rxjava-dagger
