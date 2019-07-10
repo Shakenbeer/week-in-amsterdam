@@ -18,7 +18,7 @@ It seems natural to put something with _repo_ in name to the data layer. But, an
 Implementation of `FlightsRepo` is in `data`, though. But `domain` knows nothing about it.
 
 #### Dependency injection
-Dependency injection simplifies following clean architecture approach. Koin and Dagger 2 are current choices for DI framework. ((Dagger 2 usage could be found in branch [`rxjava-dagger`][4]))
+Dependency injection simplifies following clean architecture approach. Koin and Dagger 2 are current choices for DI framework. (Dagger 2 usage could be found in branch [`rxjava-dagger`][4])
 
 #### Data
 Again, it's a matter of taste - how you implement data layer. I'm going to roughly describe my approach.
