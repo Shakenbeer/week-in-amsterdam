@@ -31,8 +31,8 @@ class RemoteFlightsSource(
         } else {
             sessionResponse.errorBody()?.let {
                 try {
-                    val serverError = errorConverter.convert(it)
-                    throw SkyscannerServerError(serverError)
+                    errorConverter.convert(it)
+                        ?.let {serverError -> throw SkyscannerServerError(serverError)}
                 } catch (e: IOException) {
                     throw UnexpectedServerError()
                 }
@@ -49,8 +49,8 @@ class RemoteFlightsSource(
         } else {
             response.errorBody()?.let {
                 try {
-                    val serverError = errorConverter.convert(it)
-                    throw SkyscannerServerError(serverError)
+                    errorConverter.convert(it)
+                        ?.let {serverError -> throw SkyscannerServerError(serverError)}
                 } catch (e: IOException) {
                     throw UnexpectedServerError()
                 }
